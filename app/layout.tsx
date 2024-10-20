@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import AuthProvider from "@/components/authProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -17,20 +18,20 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Motion",
   description: "The connected workspace where better, faster work happens.",
-  icons:{
-    icon:[
+  icons: {
+    icon: [
       {
-        media:"(prefers-color-scheme: light)",
+        media: "(prefers-color-scheme: light)",
         url: "/logo.svg",
-        href: "/logo.svg"
+        href: "/logo.svg",
       },
       {
-        media:"(prefers-color-scheme: dark)",
+        media: "(prefers-color-scheme: dark)",
         url: "/logo-dark.svg",
-        href: "/logo-dark.svg"
-      }
-    ]
-  }
+        href: "/logo-dark.svg",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -41,17 +42,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-[#1f1f1f]`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-        
+        <AuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
