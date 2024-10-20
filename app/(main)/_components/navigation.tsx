@@ -74,7 +74,7 @@ const Navigation = () => {
     if (isMobile) {
       collapse();
     } else ResetWidth();
-  }, [isMobile, pathname]);
+  }, [ResetWidth, isMobile, pathname]);
 
   useEffect(() => {
     setMounted(true);
