@@ -36,7 +36,10 @@ export default auth((req) => {
     }
     const encodedCallbackUrl = encodeURIComponent(callbackUrl);
     return Response.redirect(
-      new URL(`/auth/login?callback=${encodedCallbackUrl}`, nextUrl),
+      new URL(
+        `${DEFAULT_LOGIN_REDIRECT}?callback=${encodedCallbackUrl}`,
+        nextUrl,
+      ),
     );
   }
 

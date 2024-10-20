@@ -56,9 +56,13 @@ const LogoutButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(
+          "w-full text-muted-foreground cursor-pointer",
+          buttonVariants({ variant, size, className }),
+        )}
         ref={ref}
         {...props}
+        // eslint-disable-next-line react/no-children-prop
         children={children}
         onClick={onClick}
       />

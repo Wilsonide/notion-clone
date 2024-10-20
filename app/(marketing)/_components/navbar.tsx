@@ -3,7 +3,6 @@ import { useScrollTop } from "@/hooks/useScrollTop";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
 import { ModeToggle } from "@/components/mode-toggle";
-import { LogoutButton } from "@/components/auth/logoutButton";
 import { LoginButton } from "@/components/auth/login-button";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { Button } from "@/components/ui/button";
@@ -28,7 +27,7 @@ export const Navbar = () => {
       )}
     >
       <Logo />
-      <div className="md:ml-auto md:justify-end justify-between w-full flex items-center gap-x-4">
+      <div className="md:ml-auto md:justify-end justify-between w-full flex items-center gap-x-2">
         {status === "loading" && <Spinner />}
         {!user && status === "unauthenticated" && (
           <>

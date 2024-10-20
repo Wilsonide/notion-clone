@@ -14,8 +14,6 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { LogoutButton } from "./logoutButton";
 import { LogOut } from "lucide-react";
 
-import Link from "next/link";
-import { Settings } from "lucide-react";
 import { LoginButton } from "./login-button";
 
 export const UserButton = () => {
