@@ -2,7 +2,13 @@
 import { cn } from "@/lib/utils";
 import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
-import React, { ElementRef, useEffect, useRef, useState } from "react";
+import React, {
+  ElementRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useMediaQuery } from "usehooks-ts";
 import UserItem from "./userItem";
 
@@ -45,7 +51,7 @@ const Navigation = () => {
     document.removeEventListener("mouseup", handleMouseUp);
   };
 
-  const ResetWidth = () => {
+  const ResetWidth = useCallback(() => {
     if (sidebarRef.current && navbarRef.current) {
       setIsCollapsed(false);
       setIsResetting(true);
@@ -56,7 +62,8 @@ const Navigation = () => {
         setIsResetting(false);
       }, 300);
     }
-  };
+  }, [isMobile]);
+
   const collapse = () => {
     if (sidebarRef.current && navbarRef.current) {
       setIsCollapsed(true);
