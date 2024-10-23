@@ -3,7 +3,10 @@
  * These routes do not require authentication
  * @type {string[]}
  */
-export const publicRoutes = ["/auth/new-verification"];
+export const publicRoutes = [
+  "/auth/new-verification",
+  "http://localhost:3000/api/documents",
+];
 
 export const Root = "/";
 

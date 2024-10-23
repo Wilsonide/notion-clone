@@ -1,7 +1,13 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon } from "lucide-react";
-import { usePathname } from "next/navigation";
+import {
+  ChevronsLeft,
+  MenuIcon,
+  PlusCircle,
+  Search,
+  Settings,
+} from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import React, {
   ElementRef,
   useCallback,
@@ -11,8 +17,14 @@ import React, {
 } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import UserItem from "./userItem";
+import { Documents } from "@prisma/client";
+import Item from "./item";
+import { toast } from "sonner";
+import axios from "axios";
+import DocumentList from "./documentlist";
 
 const Navigation = () => {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -77,6 +89,27 @@ const Navigation = () => {
     }
   };
 
+  const createDocument = async () => {
+    try {
+      const { data } = await axios.post<Documents>(
+        "/api/documents",
+        JSON.stringify({
+          title: "Untitled Document",
+        }),
+        {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+        },
+      );
+      router.refresh();
+      toast.success("Document created successfully");
+      console.log("Document created:", data);
+    } catch (error) {
+      toast.error("Failed to create document");
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     if (isMobile) {
       collapse();
@@ -112,9 +145,12 @@ const Navigation = () => {
 
         <div>
           <UserItem />
+          <Item label="Search" icon={Search} isSearch onClick={() => {}} />
+          <Item label="Settings" icon={Settings} onClick={() => {}} />
+          <Item onClick={createDocument} label="New Page" icon={PlusCircle} />
         </div>
         <div className="mt-4">
-          <p>Documents</p>
+          <DocumentList />
         </div>
         <div
           className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize w-1 bg-primary/10 absolute h-full right-0 top-0"

@@ -1,6 +1,6 @@
 import Navigation from "./_components/navigation";
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
+const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="h-full flex dark:bg-[#1f1f1f]">
       <Navigation />
