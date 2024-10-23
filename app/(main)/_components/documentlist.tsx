@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Item from "./item";
 import { FileIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import axios from "axios";
 
 interface DocumentListProps {
   parentDocumentId?: string;
@@ -19,13 +20,13 @@ const DocumentList = ({ parentDocumentId, level = 0 }: DocumentListProps) => {
   const [documents, setDocuments] = useState<Documents[]>();
 
   useEffect(() => {
-    fetch(`/api/documents?parentDocumentId=${parentDocumentId}`)
-      .then((res) => res.json())
+    axios(`/api/documents?parentDocumentId=${parentDocumentId}`)
+      .then((res) => res.data)
       .then((data) => {
         console.log("documents =======================================", data);
         setDocuments(data);
       });
-  }, []);
+  }, [parentDocumentId]);
 
   const onExpanded = (documentId: string) => {
     setExpanded((prevExpanded) => ({

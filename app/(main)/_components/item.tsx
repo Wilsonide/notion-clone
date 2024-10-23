@@ -68,11 +68,13 @@ const Item = ({
       toast.success("Document created successfully");
       console.log("Document created:", data);
       router.refresh();
-      window.location.reload();
+      window.location.href = "/documents";
       /*  router.push(`/documents/${id}`) */
     } catch (error) {
       toast.error("Failed to create document");
       console.error(error);
+    } finally {
+      router.refresh();
     }
   };
 

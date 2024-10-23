@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
+  const parentDocumentId = url.searchParams.get("parentDocumentId");
+  console.log("my Query =========================: ", parentDocumentId);
 
   try {
-    const parentDocumentId = url.searchParams.get("parentDocumentId");
-    console.log("my Query =========================: ", parentDocumentId);
     const session = await auth();
     const User = session?.user;
 
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
       where: {
         isArchived: false,
         userId: User?.id,
-        parentId: parentDocumentId,
+        parentId: parentDocumentId ?? undefined,
       },
     });
     console.log(
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
         title,
         isPublished: false,
         userId: User?.id,
-        parentId,
+        parentId: parentId,
       },
     });
 

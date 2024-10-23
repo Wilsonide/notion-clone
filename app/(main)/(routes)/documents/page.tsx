@@ -27,7 +27,6 @@ const Documentspage = () => {
         },
       );
       router.refresh();
-      window.location.reload();
       toast.success("Document created successfully");
       console.log("Document created:", data);
     } catch (error) {
